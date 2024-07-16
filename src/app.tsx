@@ -1,4 +1,4 @@
-import { MapPin, Calendar, ArrowRight, WholeWord } from "lucide-react";
+import { MapPin, Calendar, ArrowRight, UserRoundPlus } from "lucide-react";
 
 export function App() {
   return (
@@ -6,10 +6,13 @@ export function App() {
       <div className="h-screen flex items-center justify-center">
         <div className="max-w-3xl w-full px-6 text-center space-y-10">
           {/* //faltando o logo.svg do planner// */}
-          <WholeWord />
-          <p className="text-zinc-300 text-lg">
-            Convide seus amigos e planeja a sua próxima viagem
-          </p>
+          <div className=" flex flex-col items-center gap-3">
+            <UserRoundPlus />
+            <p className="text-zinc-300 text-lg">
+              Convide seus amigos e planeja a sua próxima viagem
+            </p>
+          </div>
+
           <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center gap-3">
             <div className="flex items-center gap-2  flex-1">
               <MapPin className="size-5 text-zinc-400" />
