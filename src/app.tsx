@@ -7,12 +7,16 @@ import {
   X,
   AtSign,
 } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export function App() {
   const [isGuestsInputOpen, setsGuestsInputOpen] = useState<boolean>(false);
   //para chamar outro modal como tela
   const [isGuestsModalOpen, setisGuestsModalOpen] = useState<boolean>(false);
+  const [emailsToInvites, setEmailsToInvites] = useState<string[]>([
+    "fernando@sebastiao.com.ao",
+    "divaldo@helder.com.ao",
+  ]);
 
   //para chamar o modal de inputs
   function OpenIsGuestInput() {
@@ -28,6 +32,17 @@ export function App() {
   function CloseIsGuestModal() {
     setisGuestsModalOpen(false);
   }
+  function AddToInvite(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const email = data.get("email")?.toString();
+    if (!email) {
+      return;
+    }
+    setEmailsToInvites([...emailsToInvites, email]);
+    event.currentTarget.reset();
+  }
+
   return (
     <>
       <div className="h-screen flex items-center justify-center">
@@ -140,38 +155,40 @@ export function App() {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                <div className="py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2">
-                  <span className="text-zinc-300">jessica.white@gmail.com</span>
-                  <button type="button">
-                    <X className="size-4 text-zinc-400" />
-                  </button>
-                </div>
-                <div className="py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2">
-                  <span className="text-zinc-300">jessica.white@gmail.com</span>
-                  <button type="button">
-                    <X className="size-4 text-zinc-400" />
-                  </button>
-                </div>
-                <div className="py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2">
-                  <span className="text-zinc-300">jessica.white@gmail.com</span>
-                  <button type="button">
-                    <X className="size-4 text-zinc-400" />
-                  </button>
-                </div>
+                {emailsToInvites.map((email) => {
+                  return (
+                    <div
+                      key={email}
+                      className="py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2"
+                    >
+                      <span className="text-zinc-300">{email}</span>
+                      <button type="button">
+                        <X className="size-4 text-zinc-400" />
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
 
               <div className="w-full h-px bg-zinc-800" />
 
-              <form className="p-2.5 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
+              <form
+                onSubmit={AddToInvite}
+                className="p-2.5 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2"
+              >
                 <div className="px-2 flex items-center flex-1 gap-2">
                   <AtSign className="text-zinc-400 size-4" />
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Digite o e-mail do convidado"
+                    name="email"
                     className="bg-transparent text-sm placeholder-zinc-400 outline-none flex-1"
                   />
                 </div>
-                <button className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400">
+                <button
+                  type="submit"
+                  className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400"
+                >
                   Convidar amigos(as)
                   <ArrowRight className="size-5 text-lime-950" />
                 </button>
