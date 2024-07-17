@@ -1,8 +1,14 @@
-import { MapPin, Calendar, ArrowRight, UserRoundPlus } from "lucide-react";
+import {
+  MapPin,
+  Calendar,
+  ArrowRight,
+  UserRoundPlus,
+  Settings2,
+} from "lucide-react";
 import { useState } from "react";
 
 export function App() {
-  const [isGuestsInputOpen, setsGuestsInputOpen] = useState(false);
+  const [isGuestsInputOpen, setsGuestsInputOpen] = useState<boolean>(false);
 
   function OpenIsGuestInput() {
     setsGuestsInputOpen(true);
@@ -38,21 +44,28 @@ export function App() {
                 />
               </div>
 
-              <div className="w-px h-6 bg-zinc-800"></div>
-              <button
-                onClick={OpenIsGuestInput}
-                className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400"
-              >
-                Continuar
-                <ArrowRight className="size-5 text-lime-950" />
-              </button>
+              <div className="w-px h-6 bg-zinc-800" />
+              {isGuestsInputOpen ? (
+                <button className="bg-zinc-800 text-zinc-200 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-zinc-700">
+                  alterar local/data
+                  <Settings2 className="size-5 text-zinc-200" />
+                </button>
+              ) : (
+                <button
+                  onClick={OpenIsGuestInput}
+                  className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400"
+                >
+                  Continuar
+                  <ArrowRight className="size-5 text-lime-950" />
+                </button>
+              )}
             </div>
             {/* //aqui pode se colocar o ponto de interrogação ? também  */}
             {
               isGuestsInputOpen && (
                 <div className="h-16 bg-zinc-900 px-4 rounded-xl flex items-center gap-3">
                   <div className="flex items-center gap-2  flex-1">
-                    <MapPin className="size-5 text-zinc-400" />
+                    <UserRoundPlus className="size-5 text-zinc-400" />
                     <input
                       type="text"
                       placeholder="Quem estará na viagem?"
@@ -61,11 +74,8 @@ export function App() {
                   </div>
 
                   <div className="w-px h-6 bg-zinc-800"></div>
-                  <button
-                    onClick={OpenIsGuestInput}
-                    className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400"
-                  >
-                    Continuar
+                  <button className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400">
+                    Confirmar viagem
                     <ArrowRight className="size-5 text-lime-950" />
                   </button>
                 </div>
