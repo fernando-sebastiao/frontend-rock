@@ -39,8 +39,17 @@ export function App() {
     if (!email) {
       return;
     }
+    if (emailsToInvites.includes(email)) {
+      return;
+    }
     setEmailsToInvites([...emailsToInvites, email]);
     event.currentTarget.reset();
+  }
+  function removeEmailFromIvite(emailToremove: string) {
+    const newEmailList = emailsToInvites.filter(
+      (email) => email !== emailToremove
+    );
+    setEmailsToInvites(newEmailList);
   }
 
   return (
@@ -163,7 +172,10 @@ export function App() {
                     >
                       <span className="text-zinc-300">{email}</span>
                       <button type="button">
-                        <X className="size-4 text-zinc-400" />
+                        <X
+                          className="size-4 text-zinc-400"
+                          onClick={() => removeEmailFromIvite(email)}
+                        />
                       </button>
                     </div>
                   );
