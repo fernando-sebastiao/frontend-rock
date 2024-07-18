@@ -6,6 +6,7 @@ import {
   Settings2,
   X,
   AtSign,
+  User,
 } from "lucide-react";
 import { FormEvent, useState } from "react";
 
@@ -32,7 +33,7 @@ export function App() {
   function CloseIsGuestModal() {
     setisGuestsModalOpen(false);
   }
-  function AddToInvite(event: FormEvent<HTMLFormElement>) {
+  function AddEmailToInvite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email")?.toString();
@@ -185,7 +186,7 @@ export function App() {
               <div className="w-full h-px bg-zinc-800" />
 
               <form
-                onSubmit={AddToInvite}
+                onSubmit={AddEmailToInvite}
                 className="p-2.5 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2"
               >
                 <div className="px-2 flex items-center flex-1 gap-2">
@@ -208,6 +209,61 @@ export function App() {
             </div>
           </div>
         )}
+        {/* //Confirmar criação de viagem */}
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center">
+          <div className="w-[620px] rounded-xl py-5 px-6  bg-zinc-900 space-y-5">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold">
+                  Confirmar criação de viagem
+                </h2>
+                <button type="button" onClick={CloseIsGuestModal}>
+                  {" "}
+                  <X className="size-5 text-zinc-400" />
+                </button>
+              </div>
+              <p className="text-sm text-zinc-400">
+                Para confirmar a criação da viagem para{" "}
+                <span className="text-zinc-100 font-semibold">
+                  Floreniópoles, Brasil
+                </span>{" "}
+                nas datas de{" "}
+                <span className="text-zinc-100 font-semibold">
+                  16 de agosto de 2024
+                </span>{" "}
+                preencha seus dados abaixo:
+              </p>
+            </div>
+
+            <form onSubmit={AddEmailToInvite} className="space-y-3">
+              <div className="py-2.5 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
+                <User className="text-zinc-400 size-4" />
+                <input
+                  type="email"
+                  placeholder="Seu nome completo"
+                  name="name"
+                  className="bg-transparent text-sm placeholder-zinc-400 outline-none flex-1"
+                />
+              </div>
+              <div className="py-2.5 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
+                <User className="text-zinc-400 size-4" />
+                <input
+                  type="email"
+                  placeholder="Seu e-mail pessoal"
+                  name="email"
+                  className="bg-transparent text-sm placeholder-zinc-400 outline-none flex-1"
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400 w-full justify-center"
+              >
+                Convidar amigos(as)
+                <ArrowRight className="size-5 text-lime-950" />
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </>
   );
