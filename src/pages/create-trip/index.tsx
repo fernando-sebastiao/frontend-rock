@@ -65,7 +65,8 @@ export function CreateTripPage() {
   }
 
   //Função para criar Trip
-  function createTrip() {
+  function createTrip(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     navigate("/trips/123");
   }
   return (
