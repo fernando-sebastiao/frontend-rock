@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { InviteGuestModal } from "./invite-guests-modal";
 import { ConfirmTripModal } from "./confirm-trip-modal";
 import { DestinationAndDateStep } from "./steps/destination-and-date-stap";
+import { InviteGuestStep } from "./steps/invite-guests-step";
 
 export function CreateTripPage() {
   //Usando o navigation do react-houter-dom
@@ -79,7 +80,13 @@ export function CreateTripPage() {
               OpenIsGuestInput={OpenIsGuestInput}
               isGuestsInputOpen={isGuestsInputOpen}
             />
-            {isGuestsInputOpen && ()}
+            {isGuestsInputOpen && (
+              <InviteGuestStep
+                OpenIsGuestModal={OpenIsGuestModal}
+                emailsToInvite={emailsToInvites}
+                openConfirmTripModal={OpenIsConfirmTripModal}
+              />
+            )}
           </div>
           <p className="text-sm text-zinc-500">
             Ao planeja a sua viagem pela plann.er você automaticamente concorda{" "}
