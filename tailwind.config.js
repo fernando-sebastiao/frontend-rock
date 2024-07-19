@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         sans: "Inter",
       },
+      backgroundImage: {
+        pattern: "url(/bg.png)",
+      },
     },
   },
   plugins: [],

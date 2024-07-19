@@ -55,7 +55,7 @@ export function App() {
 
   return (
     <>
-      <div className="h-screen flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center bg-pattern">
         <div className="max-w-3xl w-full px-6 text-center space-y-10">
           {/* //faltando o logo.svg do planner// */}
           <div className=" flex flex-col items-center gap-3">
