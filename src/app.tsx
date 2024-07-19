@@ -57,9 +57,8 @@ export function App() {
     <>
       <div className="h-screen flex items-center justify-center bg-pattern">
         <div className="max-w-3xl w-full px-6 text-center space-y-10">
-          {/* //faltando o logo.svg do planner// */}
           <div className=" flex flex-col items-center gap-3">
-            <UserRoundPlus />
+            <img src="/logo.svg" alt="Plann.er" />
             <p className="text-zinc-300 text-lg">
               Convide seus amigos e planeja a sua próxima viagem
             </p>
