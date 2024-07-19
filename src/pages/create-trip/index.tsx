@@ -5,12 +5,16 @@ import {
   UserRoundPlus,
   Settings2,
   X,
-  AtSign,
   User,
 } from "lucide-react";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { InviteGuestModal } from "./invite-guests-modal";
 
 export function CreateTripPage() {
+  //Usando o navigation do react-houter-dom
+  const navigate = useNavigate();
+
   const [isGuestsInputOpen, setsGuestsInputOpen] = useState<boolean>(false);
   //para chamar outro modal como tela
   const [isGuestsModalOpen, setisGuestsModalOpen] = useState<boolean>(false);
@@ -41,7 +45,7 @@ export function CreateTripPage() {
   function CloseIsGuestModal() {
     setisGuestsModalOpen(false);
   }
-  function AddEmailToInvite(event: FormEvent<HTMLFormElement>) {
+  function AddNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email")?.toString();
@@ -61,6 +65,10 @@ export function CreateTripPage() {
     setEmailsToInvites(newEmailList);
   }
 
+  //Função para criar Trip
+  function createTrip() {
+    navigate("/trips/123");
+  }
   return (
     <>
       <div className="h-screen flex items-center justify-center bg-pattern">
@@ -161,70 +169,14 @@ export function CreateTripPage() {
           </p>
         </div>
         {isGuestsModalOpen && (
-          // bg-black/60 => isto é uma opacidade
-          <div className="fixed inset-0 bg-black/70 flex items-center justify-center">
-            <div className="w-[640px] rounded-xl py-5 px-6  bg-zinc-900 space-y-5">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-semibold">
-                    Selecionar convidadados
-                  </h2>
-                  <button type="button" onClick={CloseIsGuestModal}>
-                    {" "}
-                    <X className="size-5 text-zinc-400" />
-                  </button>
-                </div>
-                <p className="text-sm text-zinc-400">
-                  Os convidados irão receber e-mails para confirmar a
-                  participação nas viagens!
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {emailsToInvites.map((email) => {
-                  return (
-                    <div
-                      key={email}
-                      className="py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2"
-                    >
-                      <span className="text-zinc-300">{email}</span>
-                      <button type="button">
-                        <X
-                          className="size-4 text-zinc-400"
-                          onClick={() => removeEmailFromIvite(email)}
-                        />
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="w-full h-px bg-zinc-800" />
-
-              <form
-                onSubmit={AddEmailToInvite}
-                className="p-2.5 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2"
-              >
-                <div className="px-2 flex items-center flex-1 gap-2">
-                  <AtSign className="text-zinc-400 size-4" />
-                  <input
-                    type="email"
-                    placeholder="Digite o e-mail do convidado"
-                    name="email"
-                    className="bg-transparent text-sm placeholder-zinc-400 outline-none flex-1"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-lime-300 text-lime-950 rounded-lg px-5 h-11 font-medium flex items-center gap-2 hover:bg-lime-400"
-                >
-                  Convidar amigos(as)
-                  <ArrowRight className="size-5 text-lime-950" />
-                </button>
-              </form>
-            </div>
-          </div>
+          <InviteGuestModal
+            AddNewEmailToInvite={AddNewEmailToInvite}
+            CloseIsGuestModal={CloseIsGuestModal}
+            emailsToInvites={emailsToInvites}
+            removeEmailFromIvite={removeEmailFromIvite}
+          />
         )}
+        
         {/* //Confirmar criação de viagem */}
         {isConfirmTripModalOpen && (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center">
@@ -252,7 +204,7 @@ export function CreateTripPage() {
                 </p>
               </div>
 
-              <form onSubmit={AddEmailToInvite} className="space-y-3">
+              <form onSubmit={AddNewEmailToInvite} className="space-y-3">
                 <div className="h-11 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
                   <User className="text-zinc-400 size-4" />
                   <input
@@ -272,6 +224,7 @@ export function CreateTripPage() {
                   />
                 </div>
                 <button
+                  onClick={createTrip}
                   type="submit"
                   className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400 w-full justify-center"
                 >
