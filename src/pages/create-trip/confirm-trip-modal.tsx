@@ -7,6 +7,7 @@ interface ConfirmTripModalProps {
   setOwnerName: (name: string) => void;
   setOwnerEmail: (email: string) => void;
   createTrip: (event: FormEvent<HTMLFormElement>) => void;
+  destination: string | "";
 }
 
 export function ConfirmTripModal(props: ConfirmTripModalProps) {
@@ -26,7 +27,7 @@ export function ConfirmTripModal(props: ConfirmTripModalProps) {
           <p className="text-sm text-zinc-400">
             Para confirmar a criação da viagem para{" "}
             <span className="text-zinc-100 font-semibold">
-              Floreniópoles, Brasil
+              {props.destination}
             </span>{" "}
             nas datas de{" "}
             <span className="text-zinc-100 font-semibold">
