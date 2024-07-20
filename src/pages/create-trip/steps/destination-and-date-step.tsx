@@ -7,15 +7,22 @@ import { format } from "date-fns";
 
 interface DestinationAndDateStepProps {
   isGuestsInputOpen: boolean;
+  enventStartsAndDates: DateRange | undefined;
   CloseIsGuestInput: () => void;
   OpenIsGuestInput: () => void;
+  setDestination: (destination: string) => void;
+  setEnventStartsAndDates: (date: DateRange | undefined) => void;
 }
 
-export function DestinationAndDateStep(props: DestinationAndDateStepProps) {
+export function DestinationAndDateStep({
+  CloseIsGuestInput,
+  OpenIsGuestInput,
+  enventStartsAndDates,
+  isGuestsInputOpen,
+  setDestination,
+  setEnventStartsAndDates,
+}: DestinationAndDateStepProps) {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
-  const [enventStartsAndDates, setEnventStartsAndDates] = useState<
-    DateRange | undefined
-  >();
 
   function openDatePicker() {
     setIsDatePickerOpen(true);
@@ -35,16 +42,17 @@ export function DestinationAndDateStep(props: DestinationAndDateStepProps) {
         <div className="flex items-center gap-2  flex-1">
           <MapPin className="size-5 text-zinc-400" />
           <input
-            disabled={props.isGuestsInputOpen}
+            disabled={isGuestsInputOpen}
             type="text"
             placeholder="Para onde você vai"
             className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
+            onChange={(event) => setDestination(event.target.value)}
           />
         </div>
 
         <button
           onClick={openDatePicker}
-          disabled={props.isGuestsInputOpen}
+          disabled={isGuestsInputOpen}
           className="flex items-center gap-2 text-left w-[240px]"
         >
           <Calendar className="size-5 text-zinc-400" />
@@ -75,17 +83,17 @@ export function DestinationAndDateStep(props: DestinationAndDateStepProps) {
         )}
 
         <div className="w-px h-6 bg-zinc-800" />
-        {props.isGuestsInputOpen ? (
+        {isGuestsInputOpen ? (
           <Button
             variant="secundary"
             size="default"
-            onClick={props.CloseIsGuestInput}
+            onClick={CloseIsGuestInput}
           >
             alterar local/data
             <Settings2 className="size-5 text-zinc-200" />
           </Button>
         ) : (
-          <Button onClick={props.OpenIsGuestInput} variant="primary">
+          <Button onClick={OpenIsGuestInput} variant="primary">
             Continuar
             <ArrowRight className="size-5 text-lime-950" />
           </Button>
