@@ -1,5 +1,8 @@
 import { X, Tag, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "../../components/button";
+import { FormEvent } from "react";
+import { api } from "../../lib/axios";
+import { useParams } from "react-router-dom";
 
 interface CreateActivityModalProps {
   closeCreatedActivityModal: () => void;
@@ -7,6 +10,25 @@ interface CreateActivityModalProps {
 export function CreateActivityModal({
   closeCreatedActivityModal,
 }: CreateActivityModalProps) {
+  const { tripId } = useParams();
+
+  async function CreateActivityModal(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    const title = data.get("title")?.toString();
+    const accours_at = data.get("accours_at")?.toString();
+
+    await api.post(`/trips/${tripId}/activities`, {
+      title,
+      accours_at,
+    });
+
+    closeCreatedActivityModal();
+
+    console.log(title, accours_at);
+  }
+
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center">
       <div className="w-[520px] rounded-xl py-5 px-6  bg-zinc-900 space-y-5">
@@ -23,7 +45,7 @@ export function CreateActivityModal({
           </p>
         </div>
 
-        <form className="space-y-3">
+        <form onSubmit={CreateActivityModal} className="space-y-3">
           <div className="h-11 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
             <Tag className="text-zinc-400 size-4" />
             <input
@@ -39,7 +61,7 @@ export function CreateActivityModal({
               <input
                 type="datetime-local"
                 placeholder="Seu e-mail pessoal"
-                name="Data e horário da atividade"
+                name="accours_at"
                 className="bg-transparent text-sm placeholder-zinc-400 outline-none flex-1"
               />
             </div>
