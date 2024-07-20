@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { InviteGuestModal } from "./invite-guests-modal";
 import { ConfirmTripModal } from "./confirm-trip-modal";
-import { DestinationAndDateStep } from "./steps/destination-and-date-stap";
+import { DestinationAndDateStep } from "./steps/destination-and-date-step";
 import { InviteGuestStep } from "./steps/invite-guests-step";
 
 export function CreateTripPage() {
