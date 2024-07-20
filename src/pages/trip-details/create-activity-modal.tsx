@@ -25,6 +25,7 @@ export function CreateActivityModal({
     });
 
     closeCreatedActivityModal();
+    window.document.location.reload();
 
     console.log(title, accours_at);
   }
