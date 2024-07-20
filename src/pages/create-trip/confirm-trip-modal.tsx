@@ -1,6 +1,8 @@
 import { X, User, ArrowRight, AtSign } from "lucide-react";
 import { FormEvent } from "react";
 import { Button } from "../../components/button";
+import { DateRange } from "react-day-picker";
+import { format } from "date-fns";
 
 interface ConfirmTripModalProps {
   CloseIsConfirmTripModal: () => void;
@@ -8,9 +10,19 @@ interface ConfirmTripModalProps {
   setOwnerEmail: (email: string) => void;
   createTrip: (event: FormEvent<HTMLFormElement>) => void;
   destination: string | "";
+  enventStartsAndDates: DateRange | undefined;
+  setEnventStartsAndDates: (date: DateRange | undefined) => void;
 }
 
 export function ConfirmTripModal(props: ConfirmTripModalProps) {
+  const displayedDate =
+    props.enventStartsAndDates &&
+    props.enventStartsAndDates.from &&
+    props.enventStartsAndDates.to
+      ? format(props.enventStartsAndDates.from, "d' de 'LLL")
+          .concat(" até ")
+          .concat(format(props.enventStartsAndDates.to, "d' de 'LLL"))
+      : null;
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center">
       <div className="w-[520px] rounded-xl py-5 px-6  bg-zinc-900 space-y-5">
@@ -30,9 +42,7 @@ export function ConfirmTripModal(props: ConfirmTripModalProps) {
               {props.destination}
             </span>{" "}
             nas datas de{" "}
-            <span className="text-zinc-100 font-semibold">
-              16 de agosto de 2024
-            </span>{" "}
+            <span className="text-zinc-100 font-semibold">{displayedDate}</span>{" "}
             preencha seus dados abaixo:
           </p>
         </div>

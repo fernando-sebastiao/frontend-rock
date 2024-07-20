@@ -7,10 +7,10 @@ import { format } from "date-fns";
 
 interface DestinationAndDateStepProps {
   isGuestsInputOpen: boolean;
-  enventStartsAndDates: DateRange | undefined;
   CloseIsGuestInput: () => void;
   OpenIsGuestInput: () => void;
   setDestination: (destination: string) => void;
+  enventStartsAndDates: DateRange | undefined;
   setEnventStartsAndDates: (date: DateRange | undefined) => void;
 }
 

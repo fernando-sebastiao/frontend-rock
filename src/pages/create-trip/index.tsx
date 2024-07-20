@@ -159,6 +159,8 @@ export function CreateTripPage() {
             setOwnerName={setOwnerName}
             setOwnerEmail={setOwnerEmail}
             destination={destination}
+            setEnventStartsAndDates={setEnventStartsAndDates}
+            enventStartsAndDates={enventStartsAndDates}
           />
         )}
       </div>
