@@ -97,7 +97,9 @@ export function CreateTripPage() {
       owner_email: ownerEmail,
       emails_to_invite: emailsToInvites,
     });
+    console.log(response.data); // Verificar a resposta da API
     const { tripId } = response.data;
+    console.log(`Navigating to /trips/${tripId}`); // Verificar o tripId antes de navegar
     navigate(`/trips/${tripId}`);
   }
   return (
