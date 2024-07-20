@@ -1,4 +1,4 @@
-import { X, User, ArrowRight } from "lucide-react";
+import { X, User, ArrowRight, AtSign } from "lucide-react";
 import { FormEvent } from "react";
 import { Button } from "../../components/button";
 
@@ -49,7 +49,7 @@ export function ConfirmTripModal(props: ConfirmTripModalProps) {
             />
           </div>
           <div className="h-11 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
-            <User className="text-zinc-400 size-4" />
+            <AtSign className="text-zinc-400 size-4" />
             <input
               type="email"
               placeholder="Seu e-mail pessoal"
