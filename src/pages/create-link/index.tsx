@@ -20,13 +20,16 @@ export function CreateLinkModal({
     const title = data.get("title")?.toString();
     const url = data.get("url")?.toString();
 
-    await api.post(`/trips/${tripId}/links`, {
-      title,
-      url,
-      tripId,
-    });
+    await api
+      .post(`/trips/${tripId}/links`, {
+        title,
+        url,
+        tripId,
+      })
+      .catch((error) => console.log(error));
 
     console.log(title, url, tripId);
+    CloseCreateLinkModal();
   }
 
   return (
