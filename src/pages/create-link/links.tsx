@@ -26,7 +26,7 @@ export function Links() {
 
   useEffect(() => {
     api
-      .get(`trips/${tripId}`)
+      .get(`trips/${tripId}/links`)
       .then((response) => {
         console.log("Response data:", response.data);
         const trip: Trip = response.data;
@@ -44,13 +44,13 @@ export function Links() {
 
   return (
     <div className="space-y-8">
-      <div>
+      <div className="space-y-2">
         {links.length > 0 ? (
           links.map((link) => (
             <div key={link.id} className="space-y-2.5">
               <div className="px-4 py-2.5 bg-zinc-900 rounded-xl shadow-sm flex items-center gap-3">
                 <CircleCheck className="size-5 text-lime-300" />
-                <span className="text-zinc-100">{link.url}</span>
+                <span className="text-zinc-100">{link.title}</span>
               </div>
             </div>
           ))
