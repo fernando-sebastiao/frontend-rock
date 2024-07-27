@@ -5,8 +5,19 @@ import { CreateActivityModal } from "./create-activity-modal";
 import { DestinationAndDateHeader } from "./destination-and-date-header";
 import { Guests } from "./guests";
 import { ImportantLinks } from "./importants-links";
+import { UpdateTrip } from "./create-update-trip";
 
 export function TripDetailsPage() {
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
+
+  function OpenUpdateTripModal() {
+    setUpdateModalOpen(true);
+  }
+
+  function CloseUpdateTripModal() {
+    setUpdateModalOpen(false);
+  }
+
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] =
     useState<boolean>(false);
   function openCreatedActivityModal() {
@@ -18,7 +29,7 @@ export function TripDetailsPage() {
   return (
     <>
       <div className="max-w-6xl px-6 py-10 mx-auto space-y-8">
-        <DestinationAndDateHeader />
+        <DestinationAndDateHeader OpenUpdateTripModal={OpenUpdateTripModal} />
 
         <main className="flex gap-16 px-4">
           <div className="flex-1 space-y-6">
@@ -48,6 +59,7 @@ export function TripDetailsPage() {
           />
         )}
       </div>
+      <div>{isUpdateModalOpen && <UpdateTrip CloseUpdateTripModal={CloseUpdateTripModal} />}</div>
     </>
   );
 }
