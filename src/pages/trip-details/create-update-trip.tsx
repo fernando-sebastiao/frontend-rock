@@ -4,24 +4,6 @@ import { MapPin, Calendar, ArrowRight, X } from "lucide-react";
 import "react-day-picker/dist/style.css";
 import { Button } from "../../components/button";
 
-// interface DestinationAndDateStepProps {
-//   isGuestsInputOpen: boolean;
-//   CloseIsGuestInput: () => void;
-//   OpenIsGuestInput: () => void;
-//   setDestination: (destination: string) => void;
-//   enventStartsAndDates: DateRange | undefined;
-//   setEnventStartsAndDates: (date: DateRange | undefined) => void;
-// }
-
-// {
-//     CloseIsGuestInput,
-//     OpenIsGuestInput,
-//     enventStartsAndDates,
-//     isGuestsInputOpen,
-//     setDestination,
-//     setEnventStartsAndDates,
-//   }: DestinationAndDateStepProps
-
 interface UpdateTripProps {
   CloseUpdateTripModal: () => void;
 }
